@@ -1,0 +1,9 @@
+# id note
+4 backpack
+9 holding hand - back
+16 bag right
+17 bag left
+20 holding hands - front
+24 1more
+30 bag laft
+55 bag right

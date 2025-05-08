@@ -1,0 +1,30 @@
+# id note
+2 Tasche hinten, klein
+3 Arme vorne verschraenkt
+4 Tasche rechts, kennt Hintermann
+8 kennt Hintermann
+12 Taschr echts vorne
+16 Tasche links
+17 Rucksack
+18 Tasche links, Pulli linke Hand und vor Koerper
+20 kennt Hintermann
+23 Tasche rechts hinten
+30 gross
+32 redet anfangs mit Hintermann
+33 kennt Hintermann, Arme vorne verschraenkt
+34 Tasche links
+35 kennt Hintermann
+36 kennt Hintermann
+42 Tasche links, Schritt Pause Schritt
+43 Arme vorm Koerper verschraenkt
+44 Tasche rechts, klein
+47 kennt Hintermann
+48 tippt auf Handy, macht faxen
+49 Tasche rechts hinten
+50 kennt Hintermann, Tasche rechts
+51 Tasche rechts, kennt Hintermann
+54 kennt Hintermann
+55 Abstand zum Vordermann, gross
+56 kennt Hintermann
+58 kennt vllt Hintermann
+59 kennt Hintermann

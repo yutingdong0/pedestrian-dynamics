@@ -1,0 +1,29 @@
+# id note
+1 Tasche links
+3 linke Hand Tasche
+4 trinkt ab 386 aus Flasche, redet mit Hintermann
+5 Haende vorm Koerper geschlossen
+6 Rucksack
+7 umhaengetasche links hinten
+8 unterhaelt sich mit Hintermann
+9 Rucksack
+10 Rucksack
+11 Rucksack, kennt Hintermann
+12 Tasche rechts
+13 Tasche rechts
+14 große Schritte
+17 linker Arm steif vorm Bauch, Tasche rechts
+18 kennt hintermann
+21 Tasche links
+22 Tasche Ruecken
+26 Tasche links hinten
+27 kennt Hintermann
+33 Arme steif am Koerper
+35 Tasche rechts
+37 Umhängetasche links
+39 redet mit Hintermann, aktive Haende
+40 kennt Hintermann
+41 Tasche rechts
+44 halbe Runde Haende vor Bauch
+45 Rucksack
+46 duenner Rucksack

@@ -1,0 +1,17 @@
+# id note
+1 Rucksack
+2 Tasche vorne
+4 Tasche rechts hinten, Arme vor dem Bauch verschraenkt
+5 Tasche rechts
+6 Arme vorm Koerper verschraenkt
+8 Rucksack
+11 Tasche links
+14 Tasche links und Tasche vorne
+24 kennt Hintermann, redet
+28 Hampelmann
+32 Haende in Jackentasche
+36 Rucksack, kennt Hintermann
+37 Tasche links
+39 Rucksack, kennt Hintermann, redet
+49 kennt Hintermann, redet
+50 Tasche links
