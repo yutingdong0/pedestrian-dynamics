@@ -48,10 +48,51 @@ def pedestrian_ode(t, l, c, s):
         
 #     return np.concatenate([dxdt, dudt])  # Return both position and velocity derivatives
 
+# def loss_function(real_positions, predicted_positions, t_eval):
+#     """
+#     j(t) = \frac{1}{N} \sum_{i=1}^N \frac{1}{2} (\hat{x}_i (t) - x_i (t))^2
+#     J = \int_0^T e^{-t/T} j(t) dt
+
+#     Compute the loss function J for pedestrian trajectory prediction.
+    
+#     Parameters:
+#         params: Model parameters (first N values are c_i, last one is s)
+#         real_positions: Actual pedestrian positions (shape: [num_pedestrians, num_frames])
+#         t_eval: Time evaluation points (shape: [num_frames])
+#         initial_positions: Initial pedestrian positions (shape: [num_pedestrians])
+    
+#     Returns:
+#         Loss value J
+#     """
+#     # Default circumference
+#     circumference = 2*np.pi*3 + 4 * 2
+
+#     num_pedestrians, num_frames = real_positions.shape
+#     T = t_eval[-1]  # Total simulation time
+
+#     # Compute squared error
+#     delta = np.abs(predicted_positions - real_positions) % circumference
+#     error = np.minimum(delta, circumference - delta)
+#     squared_errors = 0.5 * error ** 2  # Shape: [num_pedestrians, num_frames]
+
+#     # Apply e^(-t/T)
+#     time_weights = np.exp(-t_eval / T)  # Shape: [num_frames]
+#     weighted_errors = squared_errors * time_weights 
+
+#     # Integrate over time (using summation)
+#     dt = t_eval[1] - t_eval[0]
+#     loss_per_pedestrian = np.sum(weighted_errors, axis=1) * dt
+#     J = np.mean(loss_per_pedestrian)  # Average over all pedestrians
+
+#     return J
+
 def loss_function(real_positions, predicted_positions, t_eval):
     """
     j(t) = \frac{1}{N} \sum_{i=1}^N \frac{1}{2} (\hat{x}_i (t) - x_i (t))^2
-    J = \int_0^T e^{-t/T} j(t) dt
+    J = \int_0^T e^{-t/T} j(t) dt + penalty
+
+    If any pedestrian overtakes another, add penalty of infinity.
+    penalty = \infty if x_i (t) > x_j (t) for any i, j
 
     Compute the loss function J for pedestrian trajectory prediction.
     
@@ -67,11 +108,18 @@ def loss_function(real_positions, predicted_positions, t_eval):
     # Default circumference
     circumference = 2*np.pi*3 + 4 * 2
 
-    num_pedestrians, num_frames = real_positions.shape
+    # Sort positions
+    sorted_predicted_positions_indices = np.argsort(predicted_positions[:, 0])
+    sorted_predicted_positions = predicted_positions[sorted_predicted_positions_indices]
+    sorted_real_positions_indices = np.argsort(real_positions[:, 0])
+    sorted_real_positions = real_positions[sorted_real_positions_indices]
+
+
+    num_pedestrians, num_frames = sorted_real_positions.shape
     T = t_eval[-1]  # Total simulation time
 
     # Compute squared error
-    delta = np.abs(predicted_positions - real_positions) % circumference
+    delta = np.abs(sorted_predicted_positions - sorted_real_positions) % circumference
     error = np.minimum(delta, circumference - delta)
     squared_errors = 0.5 * error ** 2  # Shape: [num_pedestrians, num_frames]
 
@@ -83,6 +131,18 @@ def loss_function(real_positions, predicted_positions, t_eval):
     dt = t_eval[1] - t_eval[0]
     loss_per_pedestrian = np.sum(weighted_errors, axis=1) * dt
     J = np.mean(loss_per_pedestrian)  # Average over all pedestrians
+
+    # Check for overtaking
+    for i in range(num_pedestrians):
+        j = (i + 1) % num_pedestrians  # Next pedestrian in circular track
+        if np.any((sorted_predicted_positions[i] > sorted_predicted_positions[j]) & 
+                   (sorted_predicted_positions[i] < sorted_predicted_positions[j] + 20)):
+            return np.inf
+    # for i in range(num_pedestrians):
+    #     for j in range(i + 1, num_pedestrians):
+    #         if np.any((sorted_predicted_positions[i] > sorted_predicted_positions[j]) & (sorted_predicted_positions[i] < sorted_predicted_positions[j] + 10)):
+    #             print(f"Overtaking detected between pedestrian {i} and {j}")
+    #             return np.inf  # Overtaking detected
 
     return J
 
