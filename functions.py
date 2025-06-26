@@ -137,6 +137,7 @@ def loss_function(real_positions, predicted_positions, t_eval):
         j = (i + 1) % num_pedestrians  # Next pedestrian in circular track
         if np.any((sorted_predicted_positions[i] > sorted_predicted_positions[j]) & 
                    (sorted_predicted_positions[i] < sorted_predicted_positions[j] + 20)):
+            print(f"Overtaking detected between pedestrian {i} and {j}")
             return np.inf
     # for i in range(num_pedestrians):
     #     for j in range(i + 1, num_pedestrians):
